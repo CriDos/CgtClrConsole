@@ -1,7 +1,6 @@
 ﻿//Project
 #include "stdafx.h"
 #include "Emulate.h"
-#include <string>
 
 using namespace System::Runtime::InteropServices;
 using namespace System;

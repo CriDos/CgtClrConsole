@@ -467,7 +467,7 @@ public:
 int main(array<System::String ^> ^args)
 {
 	Cgt ^cgt = gcnew Cgt();
-	cgt->RunCodeGen("C:/Users/Admin/AppData/Roaming/HiAsm_AltBuild/Elements/delphi/CodeGen.dll", 123);
+	cgt->RunCodeGen("C:/Users/Admin/AppData/Roaming/HiAsm_AltBuild/Elements/delphi/CodeGen_mod.dll", 123);
 	//cgt->RunCodeGen("C:/Users/Admin/AppData/Roaming/HiAsm_AltBuild/Elements/delphi/CodeGen_original.dll", 123);
 	Console::ReadLine();
 
