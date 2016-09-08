@@ -3,11 +3,16 @@
 #include "Emulate.h"
 
 using namespace System::Runtime::InteropServices;
+using namespace System;
 
 namespace CgtClr {
 	namespace Emulate {
-		String^ CharToString(const char* ch) {
+		String^ CharToString(char* ch) {
 			return Marshal::PtrToStringAnsi(IntPtr(ch));
+		}
+
+		const char * StringToChar(String ^managedString) {
+			return (const char*)(Marshal::StringToHGlobalAnsi(managedString)).ToPointer();
 		}
 
 		//! функции CGT
@@ -40,171 +45,173 @@ namespace CgtClr {
 		{
 			return BaseCgt::ref->elIsDefProp(id_element, index);
 		}
-		int elSetCodeName(int id_element, const char *name)
+		int elSetCodeName(int id_element, char *name)
 		{
 			return BaseCgt::ref->elSetCodeName(id_element, CharToString(name));
 		}
 		const char *elGetCodeName(int id_element)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->elGetCodeName(id_element));
 		}
 		const char *elGetClassName(int id_element)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->elGetClassName(id_element));
 		}
 		const char *elGetInfSub(int id_element)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->elGetInfSub(id_element));
 		}
 		int elGetPtCount(int id_element)
 		{
-			return 0;
+			return BaseCgt::ref->elGetPtCount(id_element);
 		}
 		int elGetPt(int id_element, int index)
 		{
-			return 0;
+			return BaseCgt::ref->elGetPt(id_element, index);
 		}
-		int elGetPtName(int id_element, const char *name)
+		int elGetPtName(int id_element, char *name)
 		{
-			return 0;
+			return BaseCgt::ref->elGetPtName(id_element, CharToString(name));
 		}
 		ElementClass elGetClassIndex(int id_element)
 		{
-			return ElementClass::CI_AS_Special;
+			return BaseCgt::ref->elGetClassIndex(id_element);
 		}
 		int elGetSDK(int id_element)
 		{
-			return 0;
+			return BaseCgt::ref->elGetSDK(id_element);
 		}
 		bool elLinkIs(int id_element)
 		{
-			return 0;
+			return BaseCgt::ref->elLinkIs(id_element);
 		}
 		int elLinkMain(int id_element)
 		{
-			return 0;
+			return BaseCgt::ref->elLinkMain(id_element);
 		}
 		void elGetPos(int id_element, int &X, int &Y)
 		{
+			BaseCgt::ref->elGetPos(id_element, X, Y);
 		}
 		void elGetSize(int id_element, int &W, int &H)
 		{
+			BaseCgt::ref->elGetSize(id_element, W, H);
 		}
 		int elGetEID(int id_point)
 		{
-			return 0;
+			return BaseCgt::ref->elGetEID(id_point);
 		}
 		int ptGetLinkPoint(int id_point)
 		{
-			return 0;
+			return BaseCgt::ref->ptGetLinkPoint(id_point);
 		}
 		int ptGetRLinkPoint(int id_point)
 		{
-			return 0;
+			return BaseCgt::ref->ptGetRLinkPoint(id_point);
 		}
 		PointType ptGetType(int id_point)
 		{
-			return PointType::pt_Data;
+			return BaseCgt::ref->ptGetType(id_point);
 		}
 		const char *ptGetName(int id_point)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->ptGetName(id_point));
 		}
 		int ptGetParent(int id_point)
 		{
-			return 0;
+			return BaseCgt::ref->ptGetParent(id_point);
 		}
 		int ptGetIndex(int id_point)
 		{
-			return 0;
+			return BaseCgt::ref->ptGetIndex(id_point);
 		}
 		const char *pt_dpeGetName(int id_point)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->pt_dpeGetName(id_point));
 		}
 		DataType propGetType(int id_prop)
 		{
-			return DataType::data_array;
+			return BaseCgt::ref->propGetType(id_prop);
 		}
 		const char *propGetName(int id_prop)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->propGetName(id_prop));
 		}
 		int propGetValue(int id_prop)
 		{
-			return 0;
+			return BaseCgt::ref->propGetValue(id_prop);
 		}
 		unsigned char propToByte(int id_prop)
 		{
-			return 0;
+			return BaseCgt::ref->propToByte(id_prop);
 		}
 		int propToInteger(int id_prop)
 		{
-			return 0;
+			return BaseCgt::ref->propToInteger(id_prop);
 		}
 		double propToReal(int id_prop)
 		{
-			return 0;
+			return BaseCgt::ref->propToReal(id_prop);
 		}
 		const char *propToString(int id_prop)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->propToString(id_prop));
 		}
-		int resAddFile(const char *name)
+		int resAddFile(char *name)
 		{
-			return 0;
+			return BaseCgt::ref->resAddFile(CharToString(name));
 		}
 		const char *resAddIcon(int id_prop)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->resAddIcon(id_prop));
 		}
-		const char *resAddStr(const char *str)
+		const char *resAddStr(char *str)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->resAddStr(CharToString(str)));
 		}
 		const char *resAddStream(int id_prop)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->resAddStream(id_prop));
 		}
 		const char *resAddWave(int id_prop)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->resAddWave(id_prop));
 		}
 		const char *resAddBitmap(int id_prop)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->resAddBitmap(id_prop));
 		}
 		const char *resAddMenu(int id_prop)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->resAddMenu(id_prop));
 		}
-		int _Debug(const char *text, int color)
+		int _Debug(char *text, int color)
 		{
-			return 0;
+			return BaseCgt::ref->_Debug(CharToString(text), color);
 		}
 		int GetParam(CgtParams index, void *value)
 		{
-			return 0;
+			return BaseCgt::ref->GetParam(index); //TODO доработать
 		}
 		int arrCount(int id_value)
 		{
-			return 0;
+			return BaseCgt::ref->arrCount(id_value);
 		}
 		DataType arrType(int id_value)
 		{
-			return DataType::data_array;
+			return BaseCgt::ref->arrType(id_value);
 		}
 		const char *arrItemName(int id_value, int index)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->arrItemName(id_value, index));
 		}
 		int arrItemData(int id_value, int index)
 		{
-			return 0;
+			return BaseCgt::ref->arrItemData(id_value, index);
 		}
 		int arrGetItem(int id_value, int index)
 		{
-			return 0;
+			return BaseCgt::ref->arrGetItem(id_value, index);
 		}
 		int isDebug(int id_element)
 		{
@@ -212,143 +219,143 @@ namespace CgtClr {
 		}
 		DataType dtType(int id_value)
 		{
-			return DataType::data_array;
+			return BaseCgt::ref->dtType(id_value);
 		}
 		const char *dtStr(int id_value)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->dtStr(id_value));
 		}
 		int dtInt(int id_value)
 		{
-			return 0;
+			return BaseCgt::ref->dtInt(id_value);
 		}
 		double dtReal(int id_value)
 		{
-			return 0;
+			return BaseCgt::ref->dtReal(id_value);
 		}
 		const char *fntName(int id_value)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->fntName(id_value));
 		}
 		int fntSize(int id_value)
 		{
-			return 0;
+			return BaseCgt::ref->fntSize(id_value);
 		}
 		unsigned char fntStyle(int id_value)
 		{
-			return 0;
+			return BaseCgt::ref->fntStyle(id_value);
 		}
 		unsigned int fntColor(int id_value)
 		{
-			return 0;
+			return BaseCgt::ref->fntColor(id_value);
 		}
 		unsigned char fntCharSet(int id_value)
 		{
-			return 0;
+			return BaseCgt::ref->fntCharSet(id_value);
 		}
 		int elGetData(int id_element)
 		{
-			return 0;
+			return BaseCgt::ref->elGetData(id_element);
 		}
 		void elSetData(int id_element, int data)
 		{
-
+			BaseCgt::ref->elSetData(id_element, data);
 		}
 		DataType ptGetDataType(int id_point)
 		{
-			return DataType::data_array;
+			return BaseCgt::ref->ptGetDataType(id_point);
 		}
 		int elGetParent(int id_element)
 		{
-			return 0;
+			return BaseCgt::ref->elGetParent(id_element);
 		}
 		int elGetPropertyListCount(int id_element)
 		{
-			return 0;
+			return BaseCgt::ref->elGetPropertyListCount(id_element);
 		}
 		int elGetPropertyListItem(int id_element, int index)
 		{
-			return 0;
+			return BaseCgt::ref->elGetPropertyListItem(id_element, index);
 		}
 		const char *plGetName(int id_point)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->plGetName(id_point));
 		}
 		const char *plGetInfo(int id_point)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->plGetInfo(id_point));
 		}
 		const char *plGetGroup(int id_point)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->plGetGroup(id_point));
 		}
 		int plGetProperty(int id_point)
 		{
-			return 0;
+			return BaseCgt::ref->plGetProperty(id_point);
 		}
 		int plGetOwner(int id_prop)
 		{
-			return 0;
+			return BaseCgt::ref->plGetOwner(id_prop);
 		}
 		const char *ptGetInfo(int id_prop)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->ptGetInfo(id_prop));
 		}
-		int propGetLinkedElement(int id_prop, const char *propName)
+		int propGetLinkedElement(int id_prop, char *propName)
 		{
-			return 0;
+			return BaseCgt::ref->propGetLinkedElement(id_prop, CharToString(propName));
 		}
 		int propIsTranslate(int id_element, int id_prop)
 		{
-			return 0;
+			return BaseCgt::ref->propIsTranslate(id_element, id_prop);
 		}
 		int propGetLinkedElementInfo(int id_element, int id_prop, char *info)
 		{
-			return 0;
+			return BaseCgt::ref->propGetLinkedElementInfo(id_element, id_prop, CharToString(info));
 		}
 		int elGetSDKByIndex(int id_element, int index)
 		{
-			return 0;
+			return BaseCgt::ref->elGetSDKByIndex(id_element, index);
 		}
 		int elGetSDKCount(int id_element)
 		{
-			return 0;
+			return BaseCgt::ref->elGetSDKCount(id_element);
 		}
 		const char *elGetSDKName(int id_element, int index)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->elGetSDKName(id_element, index));
 		}
 		int sdkGetParent(int id_sdk)
 		{
-			return 0;
+			return BaseCgt::ref->sdkGetParent(id_sdk);
 		}
 		const char *elGetInterface(int id_element)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->elGetInterface(id_element));
 		}
 		const char *elGetInherit(int id_element)
 		{
-			return 0;
+			return StringToChar(BaseCgt::ref->elGetInherit(id_element));
 		}
 		int resEmpty()
 		{
-			return 0;
+			return BaseCgt::ref->resEmpty();
 		}
-		int resSetPref(const char *pref)
+		int resSetPref(char *pref)
 		{
-			return 0;
+			return BaseCgt::ref->resSetPref(CharToString(pref));
 		}
-		int _Error(int line, int id_element, const char *text)
+		int _Error(int line, int id_element, char *text)
 		{
-			return 0;
+			return BaseCgt::ref->_Error(line, id_element, CharToString(text));
 		}
 		int elGetGroup(int id_element)
 		{
-			return 0;
+			return BaseCgt::ref->elGetGroup(id_element);
 		}
-		int propSaveToFile(int id_prop, const char *fileName)
+		int propSaveToFile(int id_prop, char *fileName)
 		{
-			return 0;
+			return BaseCgt::ref->propSaveToFile(id_prop, CharToString(fileName));
 		}
 
 		static void* proxyCgt[]{
