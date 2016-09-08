@@ -133,7 +133,7 @@ namespace CgtClr {
 		};
 
 		//!ru Индексы параметров среды - GetParam()
-		public enum class CgtParams {
+		public enum CgtParams {
 			PARAM_CODE_PATH = 0,
 			PARAM_DEBUG_MODE,
 			PARAM_DEBUG_SERVER_PORT,

@@ -238,9 +238,13 @@ public:
 		return 0;
 	}
 
-	virtual int GetParam(CgtParams index) override
+	virtual Object ^GetParam(CgtParams index) override
 	{
-		return 0;
+		if (index == CgtParams::PARAM_CODE_PATH) {
+			return gcnew String("test");
+		}
+
+		return gcnew Int32(123);
 	}
 
 	virtual int arrCount(int id_value) override

@@ -1,12 +1,14 @@
 ﻿//Project
 #include "stdafx.h"
 #include "Emulate.h"
+#include <string>
 
 using namespace System::Runtime::InteropServices;
 using namespace System;
 
 namespace CgtClr {
 	namespace Emulate {
+		//Служебные функции
 		String^ CharToString(char* ch) {
 			return Marshal::PtrToStringAnsi(IntPtr(ch));
 		}
@@ -189,9 +191,61 @@ namespace CgtClr {
 		{
 			return BaseCgt::ref->_Debug(CharToString(text), color);
 		}
-		int GetParam(CgtParams index, void *value)
+		int GetParam(CgtParams index, void *buf) //TODO проверить
 		{
-			return BaseCgt::ref->GetParam(index); //TODO доработать
+			Object ^param = BaseCgt::ref->GetParam(index);
+
+			if (param == nullptr)
+				return 0;
+
+			auto writeString = [buf](Object ^obj) {
+#pragma warning( disable : 4996 )
+				strcpy(reinterpret_cast<char *>(buf), StringToChar(obj->ToString()));
+			};
+			auto writeInt = [buf](Object ^obj) {
+				*reinterpret_cast<int *>(buf) = (int)obj; //-V206
+			};
+
+			switch (index) {
+			case CgtParams::PARAM_CODE_PATH:
+				writeString(param);
+				break;
+			case CgtParams::PARAM_DEBUG_MODE:
+				writeInt(param);
+				break;
+			case CgtParams::PARAM_DEBUG_SERVER_PORT:
+				writeInt(param);
+				break;
+			case CgtParams::PARAM_DEBUG_CLIENT_PORT:
+				writeInt(param);
+				break;
+			case CgtParams::PARAM_PROJECT_PATH:
+				writeString(param);
+				break;
+			case CgtParams::PARAM_HIASM_VERSION:
+				writeString(param);
+				break;
+			case CgtParams::PARAM_USER_NAME:
+				writeString(param);
+				break;
+			case CgtParams::PARAM_USER_MAIL:
+				writeString(param);
+				break;
+			case CgtParams::PARAM_PROJECT_NAME:
+				writeString(param);
+				break;
+			case CgtParams::PARAM_SDE_WIDTH:
+				writeInt(param);
+				break;
+			case CgtParams::PARAM_SDE_HEIGHT:
+				writeInt(param);
+				break;
+			case CgtParams::PARAM_COMPILER:
+				writeString(param);
+				break;
+			}
+
+			return 0;
 		}
 		int arrCount(int id_value)
 		{
