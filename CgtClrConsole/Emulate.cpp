@@ -6,7 +6,7 @@ using namespace System::Runtime::InteropServices;
 
 namespace CgtClr {
 	namespace Emulate {
-		String^ CharToString(char* ch) {
+		String^ CharToString(const char* ch) {
 			return Marshal::PtrToStringAnsi(IntPtr(ch));
 		}
 
@@ -26,23 +26,23 @@ namespace CgtClr {
 		}
 		ElementFlags elGetFlag(int id_element)
 		{
-			return ElementFlags::ELEMENT_FLG_IS_CORE;
+			return BaseCgt::ref->elGetFlag(id_element);
 		}
 		int elGetPropCount(int id_element)
 		{
-			return 0;
+			return BaseCgt::ref->elGetPropCount(id_element);
 		}
 		int elGetProperty(int id_element, int index)
 		{
-			return 0;
+			return BaseCgt::ref->elGetProperty(id_element, index);
 		}
 		bool elIsDefProp(int id_element, int index)
 		{
-			return 0;
+			return BaseCgt::ref->elIsDefProp(id_element, index);
 		}
 		int elSetCodeName(int id_element, const char *name)
 		{
-			return 0;
+			return BaseCgt::ref->elSetCodeName(id_element, CharToString(name));
 		}
 		const char *elGetCodeName(int id_element)
 		{
