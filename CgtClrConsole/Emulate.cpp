@@ -2,8 +2,13 @@
 #include "stdafx.h"
 #include "Emulate.h"
 
+using namespace System::Runtime::InteropServices;
+
 namespace CgtClr {
 	namespace Emulate {
+		String^ CharToString(char* ch) {
+			return Marshal::PtrToStringAnsi(IntPtr(ch));
+		}
 
 		//! функции CGT
 
@@ -13,11 +18,11 @@ namespace CgtClr {
 		}
 		int sdkGetElement(int id_sdk, int index)
 		{
-			return 0;
+			return BaseCgt::ref->sdkGetElement(id_sdk, index);
 		}
 		int sdkGetElementName(int id_sdk, char *name)
 		{
-			return 0;
+			return BaseCgt::ref->sdkGetElementName(id_sdk, CharToString(name));
 		}
 		ElementFlags elGetFlag(int id_element)
 		{
